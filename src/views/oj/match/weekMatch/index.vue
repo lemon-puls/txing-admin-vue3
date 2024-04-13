@@ -77,6 +77,16 @@
         >导出
         </el-button>
       </el-col>
+      <el-col :span="1.5">
+        <el-button
+            type="success"
+            plain
+            icon="Plus"
+            @click="handleCreateMatch"
+            v-hasPermi="['oj:weekMatch:create']"
+        >生成下场比赛
+        </el-button>
+      </el-col>
       <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
@@ -150,22 +160,22 @@
         <el-form-item label="场次" prop="sessionNo">
           <el-input v-model="form.sessionNo" placeholder="请输入场次"/>
         </el-form-item>
-        <el-form-item label="开始时间" prop="startTime">
-          <el-date-picker clearable
-                          v-model="form.startTime"
-                          type="datetime"
-                          value-format="YYYY-MM-DD HH:mm:ss"
-                          placeholder="请选择开始时间">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="结束时间" prop="endTime">
-          <el-date-picker clearable
-                          v-model="form.endTime"
-                          type="datetime"
-                          value-format="YYYY-MM-DD HH:mm:ss"
-                          placeholder="请选择结束时间">
-          </el-date-picker>
-        </el-form-item>
+        <!--        <el-form-item label="开始时间" prop="startTime">-->
+        <!--          <el-date-picker clearable-->
+        <!--                          v-model="form.startTime"-->
+        <!--                          type="datetime"-->
+        <!--                          value-format="YYYY-MM-DD HH:mm:ss"-->
+        <!--                          placeholder="请选择开始时间">-->
+        <!--          </el-date-picker>-->
+        <!--        </el-form-item>-->
+        <!--        <el-form-item label="结束时间" prop="endTime">-->
+        <!--          <el-date-picker clearable-->
+        <!--                          v-model="form.endTime"-->
+        <!--                          type="datetime"-->
+        <!--                          value-format="YYYY-MM-DD HH:mm:ss"-->
+        <!--                          placeholder="请选择结束时间">-->
+        <!--          </el-date-picker>-->
+        <!--        </el-form-item>-->
       </el-form>
       <template #footer>
         <div class="dialog-footer">
@@ -273,6 +283,28 @@ function handleAdd() {
   reset();
   open.value = true;
   title.value = "添加周赛";
+}
+
+// 创建下一场比赛
+function handleCreateMatch() {
+  let xhr = new XMLHttpRequest();
+  xhr.open('GET', 'http://localhost:8121/api/match/week/create', true);
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        var data = JSON.parse(xhr.responseText);
+        if (data.code != 0) {
+          modal.msgWarning(data.data);
+          return;
+        }
+        getList();
+        modal.msgSuccess("创建成功");
+      } else {
+        modal.msgError("创建失败，请稍后重试！");
+      }
+    }
+  };
+  xhr.send();
 }
 
 /** 修改按钮操作 */
