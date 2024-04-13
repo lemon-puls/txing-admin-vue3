@@ -226,24 +226,24 @@ function handleQuery() {
 function handleGenTable(row) {
   const tbNames = row.tableName || tableNames.value;
   if (tbNames == "") {
-    proxy.$modal.msgError("请选择要生成的数据");
+    modal.msgError("请选择要生成的数据");
     return;
   }
   if (row.genType === "1") {
     genCode(row.tableName).then(response => {
-      proxy.$modal.msgSuccess("成功生成到自定义路径：" + row.genPath);
+      modal.msgSuccess("成功生成到自定义路径：" + row.genPath);
     });
   } else {
-    proxy.$download.zip("/tool/gen/batchGenCode?tables=" + tbNames, "ruoyi.zip");
+    proxy.$download.zip("/tool/gen/batchGenCode?tables=" + tbNames, "txing.zip");
   }
 }
 /** 同步数据库操作 */
 function handleSynchDb(row) {
   const tableName = row.tableName;
-  proxy.$modal.confirm('确认要强制同步"' + tableName + '"表结构吗？').then(function () {
+  modal.confirm('确认要强制同步"' + tableName + '"表结构吗？').then(function () {
     return synchDb(tableName);
   }).then(() => {
-    proxy.$modal.msgSuccess("同步成功");
+    modal.msgSuccess("同步成功");
   }).catch(() => {});
 }
 /** 打开导入表弹窗 */
@@ -270,7 +270,7 @@ function handlePreview(row) {
 }
 /** 复制代码成功 */
 function copyTextSuccess() {
-  proxy.$modal.msgSuccess("复制成功");
+  modal.msgSuccess("复制成功");
 }
 // 多选框选中数据
 function handleSelectionChange(selection) {

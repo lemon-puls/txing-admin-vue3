@@ -14,7 +14,7 @@
 
 <script setup>
 import { createTable } from "@/api/tool/gen";
-
+import modal from "@/plugins/modal.js";
 const visible = ref(false);
 const content = ref("");
 const { proxy } = getCurrentInstance();
@@ -28,11 +28,11 @@ function show() {
 /** 导入按钮操作 */
 function handleImportTable() {
   if (content.value === "") {
-    proxy.$modal.msgError("请输入建表语句");
+    modal.msgError("请输入建表语句");
     return;
   }
   createTable({ sql: content.value }).then(res => {
-    proxy.$modal.msgSuccess(res.msg);
+    modal.msgSuccess(res.msg);
     if (res.code === 200) {
       visible.value = false;
       emit("ok");

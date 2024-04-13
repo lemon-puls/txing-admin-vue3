@@ -24,7 +24,7 @@
 
 <script setup>
 import { updateUserProfile } from "@/api/system/user";
-
+import modal from "@/plugins/modal.js";
 const props = defineProps({
   user: {
     type: Object
@@ -45,7 +45,7 @@ function submit() {
   proxy.$refs.userRef.validate(valid => {
     if (valid) {
       updateUserProfile(form.value).then(response => {
-        proxy.$modal.msgSuccess("修改成功");
+        modal.msgSuccess("修改成功");
         props.user.phonenumber = form.value.phonenumber;
         props.user.email = form.value.email;
       });

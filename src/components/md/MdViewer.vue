@@ -60,8 +60,8 @@ const props = withDefaults(defineProps<Props>(), {
 /*  width: auto;*/
 /*  max-width: 100%;*/
 /*}*/
-.medium-zoom-overlay {
-  opacity: 0.6 !important;
-  background: black !important;
-}
+/*.medium-zoom-overlay {*/
+/*  opacity: 0.6 !important;*/
+/*  background: black !important;*/
+/*}*/
 </style>

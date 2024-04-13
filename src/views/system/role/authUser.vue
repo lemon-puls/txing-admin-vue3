@@ -94,7 +94,7 @@
 <script setup name="AuthUser">
 import selectUser from "./selectUser";
 import { allocatedUserList, authUserCancel, authUserCancelAll } from "@/api/system/role";
-
+import modal from "@/plugins/modal.js";
 const route = useRoute();
 const { proxy } = getCurrentInstance();
 const { sys_normal_disable } = proxy.useDict("sys_normal_disable");
@@ -149,22 +149,22 @@ function openSelectUser() {
 }
 /** 取消授权按钮操作 */
 function cancelAuthUser(row) {
-  proxy.$modal.confirm('确认要取消该用户"' + row.userName + '"角色吗？').then(function () {
+  modal.confirm('确认要取消该用户"' + row.userName + '"角色吗？').then(function () {
     return authUserCancel({ userId: row.userId, roleId: queryParams.roleId });
   }).then(() => {
     getList();
-    proxy.$modal.msgSuccess("取消授权成功");
+    modal.msgSuccess("取消授权成功");
   }).catch(() => {});
 }
 /** 批量取消授权按钮操作 */
 function cancelAuthUserAll(row) {
   const roleId = queryParams.roleId;
   const uIds = userIds.value.join(",");
-  proxy.$modal.confirm("是否取消选中用户授权数据项?").then(function () {
+  modal.confirm("是否取消选中用户授权数据项?").then(function () {
     return authUserCancelAll({ roleId: roleId, userIds: uIds });
   }).then(() => {
     getList();
-    proxy.$modal.msgSuccess("取消授权成功");
+    modal.msgSuccess("取消授权成功");
   }).catch(() => {});
 }
 

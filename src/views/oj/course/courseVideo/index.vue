@@ -122,7 +122,7 @@
 
 <script setup name="CourseVideo">
 import { listCourseVideo, getCourseVideo, delCourseVideo, addCourseVideo, updateCourseVideo } from "@/api/oj/CourseVideo.js";
-
+import modal from "@/plugins/modal.js";
 const { proxy } = getCurrentInstance();
 
 const CourseVideoList = ref([]);
@@ -228,13 +228,13 @@ function submitForm() {
     if (valid) {
       if (form.value.id != null) {
         updateCourseVideo(form.value).then(response => {
-          proxy.$modal.msgSuccess("修改成功");
+          modal.msgSuccess("修改成功");
           open.value = false;
           getList();
         });
       } else {
         addCourseVideo(form.value).then(response => {
-          proxy.$modal.msgSuccess("新增成功");
+          modal.msgSuccess("新增成功");
           open.value = false;
           getList();
         });
@@ -246,11 +246,11 @@ function submitForm() {
 /** 删除按钮操作 */
 function handleDelete(row) {
   const _ids = row.id || ids.value;
-  proxy.$modal.confirm('是否确认删除课程视频编号为"' + _ids + '"的数据项？').then(function() {
+  modal.confirm('是否确认删除课程视频编号为"' + _ids + '"的数据项？').then(function() {
     return delCourseVideo(_ids);
   }).then(() => {
     getList();
-    proxy.$modal.msgSuccess("删除成功");
+    modal.msgSuccess("删除成功");
   }).catch(() => {});
 }
 

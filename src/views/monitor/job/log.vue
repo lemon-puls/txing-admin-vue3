@@ -173,7 +173,7 @@
 <script setup name="JobLog">
 import { getJob } from "@/api/monitor/job";
 import { listJobLog, delJobLog, cleanJobLog } from "@/api/monitor/jobLog";
-
+import modal from "@/plugins/modal.js";
 const { proxy } = getCurrentInstance();
 const { sys_common_status, sys_job_group } = proxy.useDict("sys_common_status", "sys_job_group");
 
@@ -237,20 +237,20 @@ function handleView(row) {
 }
 /** 删除按钮操作 */
 function handleDelete(row) {
-  proxy.$modal.confirm('是否确认删除调度日志编号为"' + ids.value + '"的数据项?').then(function () {
+  modal.confirm('是否确认删除调度日志编号为"' + ids.value + '"的数据项?').then(function () {
     return delJobLog(ids.value);
   }).then(() => {
     getList();
-    proxy.$modal.msgSuccess("删除成功");
+    modal.msgSuccess("删除成功");
   }).catch(() => {});
 }
 /** 清空按钮操作 */
 function handleClean() {
-  proxy.$modal.confirm("是否确认清空所有调度日志数据项?").then(function () {
+  modal.confirm("是否确认清空所有调度日志数据项?").then(function () {
     return cleanJobLog();
   }).then(() => {
     getList();
-    proxy.$modal.msgSuccess("清空成功");
+    modal.msgSuccess("清空成功");
   }).catch(() => {});
 }
 /** 导出按钮操作 */

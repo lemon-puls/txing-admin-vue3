@@ -333,11 +333,11 @@ function submitForm() {
 /** 删除按钮操作 */
 function handleDelete(row) {
   const _ids = row.id || ids.value;
-  proxy.$modal.confirm('是否确认删除课程编号为"' + _ids + '"的数据项？').then(function () {
+  modal.confirm('是否确认删除课程编号为"' + _ids + '"的数据项？').then(function () {
     return delCourse(_ids);
   }).then(() => {
     getList();
-    proxy.$modal.msgSuccess("删除成功");
+    modal.msgSuccess("删除成功");
   }).catch(() => {
   });
 }

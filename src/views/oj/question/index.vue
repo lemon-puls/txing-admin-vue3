@@ -343,13 +343,13 @@ function submitForm() {
     if (valid) {
       if (form.value.id != null) {
         updateQuestion(form.value).then(response => {
-          proxy.$modal.msgSuccess("修改成功");
+          modal.msgSuccess("修改成功");
           open.value = false;
           getList();
         });
       } else {
         addQuestion(form.value).then(response => {
-          proxy.$modal.msgSuccess("新增成功");
+          modal.msgSuccess("新增成功");
           open.value = false;
           getList();
         });
@@ -365,7 +365,7 @@ function handleDelete(row) {
     return delQuestion(_ids);
   }).then(() => {
     getList();
-    proxy.$modal.msgSuccess("删除成功");
+    modal.msgSuccess("删除成功");
   }).catch(() => {
   });
 }

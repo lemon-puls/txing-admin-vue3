@@ -47,7 +47,7 @@
 
 <script setup name="AuthRole">
 import { getAuthRole, updateAuthRole } from "@/api/system/user";
-
+import modal from "@/plugins/modal.js";
 const route = useRoute();
 const { proxy } = getCurrentInstance();
 
@@ -85,7 +85,7 @@ function submitForm() {
   const userId = form.value.userId;
   const rIds = roleIds.value.join(",");
   updateAuthRole({ userId: userId, roleIds: rIds }).then(response => {
-    proxy.$modal.msgSuccess("授权成功");
+    modal.msgSuccess("授权成功");
     close();
   });
 };

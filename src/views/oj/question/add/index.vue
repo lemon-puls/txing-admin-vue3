@@ -18,14 +18,14 @@
       </a-form-item>
       <a-form-item field="content" label="题目内容">
         <MdEditor
-            style="max-width: 50vw; width: 80%"
+            style="max-width: 70vw; width: 100%"
             :value="form.content"
             :handle-change="onContentChange"
         />
       </a-form-item>
       <a-form-item field="answer" label="答案">
         <MdEditor
-            style="max-width: 50vw; width: 80%"
+            style="max-width: 70vw; width: 100%"
             :value="form.answer"
             :handle-change="onAnswerChange"
         />
@@ -214,7 +214,7 @@ const doSubmit = async () => {
         content: "更新成功",
       });
       router.push({
-        path: "/question/center"
+        path: "/oj/question/center"
       })
     })
   } else {
@@ -223,13 +223,14 @@ const doSubmit = async () => {
       message.success("创建成功");
     });
     router.push({
-      path: "/question/center"
+      path: "/oj/question/center"
     })
   }
 };
 
 const onContentChange = (value) => {
   form.value.content = value;
+  console.log("题目内容：", value);
 };
 
 const onAnswerChange = (value) => {

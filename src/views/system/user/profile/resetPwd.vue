@@ -18,7 +18,7 @@
 
 <script setup>
 import { updateUserPwd } from "@/api/system/user";
-
+import modal from "@/plugins/modal.js";
 const { proxy } = getCurrentInstance();
 
 const user = reactive({
@@ -45,7 +45,7 @@ function submit() {
   proxy.$refs.pwdRef.validate(valid => {
     if (valid) {
       updateUserPwd(user.oldPassword, user.newPassword).then(response => {
-        proxy.$modal.msgSuccess("修改成功");
+        modal.msgSuccess("修改成功");
       });
     }
   });

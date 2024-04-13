@@ -166,8 +166,8 @@
                            <el-tooltip placement="top">
                               <template #content>
                                  <div>
-                                    Bean调用示例：ryTask.ryParams('ry')
-                                    <br />Class类调用示例：com.ruoyi.quartz.task.RyTask.ryParams('ry')
+                                    Bean调用示例：ryTask.ryParams('tx')
+                                    <br />Class类调用示例：com.txing.quartz.task.TxTask.txParams('tx')
                                     <br />参数说明：支持字符串，布尔类型，长整型，浮点型，整型
                                  </div>
                               </template>
@@ -287,6 +287,7 @@
 <script setup name="Job">
 import { listJob, getJob, delJob, addJob, updateJob, runJob, changeJobStatus } from "@/api/monitor/job";
 import Crontab from '@/components/Crontab'
+import modal from "@/plugins/modal.js";
 const router = useRouter();
 const { proxy } = getCurrentInstance();
 const { sys_job_group, sys_job_status } = proxy.useDict("sys_job_group", "sys_job_status");
@@ -389,20 +390,20 @@ function handleCommand(command, row) {
 // 任务状态修改
 function handleStatusChange(row) {
   let text = row.status === "0" ? "启用" : "停用";
-  proxy.$modal.confirm('确认要"' + text + '""' + row.jobName + '"任务吗?').then(function () {
+  modal.confirm('确认要"' + text + '""' + row.jobName + '"任务吗?').then(function () {
     return changeJobStatus(row.jobId, row.status);
   }).then(() => {
-    proxy.$modal.msgSuccess(text + "成功");
+    modal.msgSuccess(text + "成功");
   }).catch(function () {
     row.status = row.status === "0" ? "1" : "0";
   });
 }
 /* 立即执行一次 */
 function handleRun(row) {
-  proxy.$modal.confirm('确认要立即执行一次"' + row.jobName + '"任务吗?').then(function () {
+  modal.confirm('确认要立即执行一次"' + row.jobName + '"任务吗?').then(function () {
     return runJob(row.jobId, row.jobGroup);
   }).then(() => {
-    proxy.$modal.msgSuccess("执行成功");})
+    modal.msgSuccess("执行成功");})
   .catch(() => {});
 }
 /** 任务详细信息 */
@@ -448,13 +449,13 @@ function submitForm() {
     if (valid) {
       if (form.value.jobId != undefined) {
         updateJob(form.value).then(response => {
-          proxy.$modal.msgSuccess("修改成功");
+          modal.msgSuccess("修改成功");
           open.value = false;
           getList();
         });
       } else {
         addJob(form.value).then(response => {
-          proxy.$modal.msgSuccess("新增成功");
+          modal.msgSuccess("新增成功");
           open.value = false;
           getList();
         });
@@ -465,11 +466,11 @@ function submitForm() {
 /** 删除按钮操作 */
 function handleDelete(row) {
   const jobIds = row.jobId || ids.value;
-  proxy.$modal.confirm('是否确认删除定时任务编号为"' + jobIds + '"的数据项?').then(function () {
+  modal.confirm('是否确认删除定时任务编号为"' + jobIds + '"的数据项?').then(function () {
     return delJob(jobIds);
   }).then(() => {
     getList();
-    proxy.$modal.msgSuccess("删除成功");
+    modal.msgSuccess("删除成功");
   }).catch(() => {});
 }
 /** 导出按钮操作 */
