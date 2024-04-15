@@ -1,11 +1,11 @@
 <template>
-  <Viewer id="viewerClass" :value="value" :plugins="plugins" :locale="zhHans" />
+  <Viewer id="viewerClass" :value="value" :plugins="plugins" :locale="zhHans"/>
 </template>
 
 <script setup lang="ts">
-import { Viewer } from "@bytemd/vue-next";
-import { markRaw } from "vue";
-import { defineProps, withDefaults } from "vue";
+import {Viewer} from "@bytemd/vue-next";
+import {markRaw} from "vue";
+import {defineProps, withDefaults} from "vue";
 import breaks from "@bytemd/plugin-breaks";
 import frontmatter from "@bytemd/plugin-frontmatter";
 import gemoji from "@bytemd/plugin-gemoji";

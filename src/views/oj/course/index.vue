@@ -71,7 +71,6 @@
             plain
             icon="Download"
             @click="handleExport"
-            v-hasPermi="['oj:course:export']"
         >导出
         </el-button>
       </el-col>
@@ -130,14 +129,13 @@
       <el-table-column label="操作" align="center" width="200">
         <template #default="scope">
           <div class="row-ops" style="display: flex; justify-content: center; align-items: center">
-            <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['oj:course:edit']">
+            <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)">
               审批
             </el-button>
             <!--            <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)"-->
             <!--                       v-hasPermi="['oj:course:remove']">删除-->
             <!--            </el-button>-->
-            <el-button link type="primary" icon="" @click="handlePlay(scope.row)"
-                       v-hasPermi="['oj:course:play']">
+            <el-button link type="primary" icon="" @click="handlePlay(scope.row)">
               <el-icon class="el-icon--left">
                 <SvgIcon icon-class="video"/>
               </el-icon>
