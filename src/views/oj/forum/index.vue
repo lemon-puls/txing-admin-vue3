@@ -59,8 +59,7 @@
             icon="Edit"
             :disabled="single"
             @click="handleUpdate"
-            v-hasPermi="['oj:forum:edit']"
-        >修改
+        >审批
         </el-button>
       </el-col>
       <!--      <el-col :span="1.5">-->
@@ -80,7 +79,6 @@
             plain
             icon="Download"
             @click="handleExport"
-            v-hasPermi="['oj:forum:export']"
         >导出
         </el-button>
       </el-col>
@@ -136,14 +134,13 @@
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
           <div class="row-ops" style="display: flex; justify-content: center; align-items: center">
-            <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['oj:forum:edit']">
-              修改
+            <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)">
+              审批
             </el-button>
             <!--            <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)"-->
             <!--                       v-hasPermi="['oj:forum:remove']">删除-->
             <!--            </el-button>-->
-            <el-button link type="primary" @click="handleView(scope.row)"
-                       v-hasPermi="['oj:forum:view']">
+            <el-button link type="primary" @click="handleView(scope.row)">
               <el-icon class="el-icon--left">
                 <SvgIcon icon-class="view"/>
               </el-icon>
@@ -181,7 +178,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="备注" prop="remark">
-          <el-input v-model="form.remark" placeholder="请输入备注"/>
+          <el-input maxlength="20" show-word-limit v-model="form.remark" placeholder="请输入备注"/>
         </el-form-item>
       </el-form>
       <template #footer>

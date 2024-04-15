@@ -28,7 +28,7 @@
             unlink-panels
         ></el-date-picker>
       </el-form-item>
-<!--      <el-form-item label="结束时间" style="width: 308px">-->
+      <!--      <el-form-item label="结束时间" style="width: 308px">-->
       <!--        <el-date-picker-->
       <!--            v-model="daterangeEndTime"-->
       <!--            value-format="YYYY-MM-DD"-->
@@ -46,6 +46,16 @@
       <!--            @keyup.enter="handleQuery"-->
       <!--        />-->
       <!--      </el-form-item>-->
+      <el-form-item label="状态" prop="status">
+        <el-select v-model="queryParams.status" placeholder="请选择">
+          <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+          </el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
         <el-button icon="Refresh" @click="resetQuery">重置</el-button>
@@ -81,7 +91,6 @@
             icon="Delete"
             :disabled="multiple"
             @click="handleDelete"
-            v-hasPermi="['oj:onlinepk:remove']"
         >删除
         </el-button>
       </el-col>
@@ -91,7 +100,6 @@
             plain
             icon="Download"
             @click="handleExport"
-            v-hasPermi="['oj:onlinepk:export']"
         >导出
         </el-button>
       </el-col>
@@ -203,7 +211,7 @@
           <!--            修改-->
           <!--          </el-button>-->
           <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)"
-                     v-hasPermi="['oj:onlinepk:remove']">删除
+          >删除
           </el-button>
         </template>
       </el-table-column>
@@ -408,6 +416,20 @@ const loadUserShows = async () => {
     userShows.value = res.data;
   });
 }
+// 比赛状态
+const options = [
+  // {
+  //   value: 0,
+  //   label: '未开始',
+  // },
+  {
+    value: 1,
+    label: '进行中',
+  },
+  {
+    value: 2,
+    label: '已结束',
+  }]
 
 getList();
 loadUserShows();

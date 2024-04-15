@@ -76,7 +76,7 @@ const uploadImage = async (files) => {
   formData.append('file', files[0]); // 将文件添加到 FormData
   formData.append('postId', props.postId); // 将字符串值添加到 FormData
   formData.append("biz", props.biz);
-  const res = await sendRequest('http://localhost:8121/api/file/upload/12423534672436234', formData);
+  const res = await sendRequest('http://124.71.1.148:8121/api/file/upload/12423534672436234', formData);
   var data = JSON.parse(res as any);
   if (data.code !== 0) {
     message.error(data.msg);

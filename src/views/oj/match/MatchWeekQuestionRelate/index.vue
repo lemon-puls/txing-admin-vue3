@@ -3,34 +3,34 @@
     <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="比赛id" prop="matchId">
         <el-input
-          v-model="queryParams.matchId"
-          placeholder="请输入比赛id"
-          clearable
-          @keyup.enter="handleQuery"
+            v-model="queryParams.matchId"
+            placeholder="请输入比赛id"
+            clearable
+            @keyup.enter="handleQuery"
         />
       </el-form-item>
       <el-form-item label="题目id" prop="questionId">
         <el-input
-          v-model="queryParams.questionId"
-          placeholder="请输入题目id"
-          clearable
-          @keyup.enter="handleQuery"
+            v-model="queryParams.questionId"
+            placeholder="请输入题目id"
+            clearable
+            @keyup.enter="handleQuery"
         />
       </el-form-item>
       <el-form-item label="题目序号" prop="questionOrder">
         <el-input
-          v-model="queryParams.questionOrder"
-          placeholder="请输入题目序号"
-          clearable
-          @keyup.enter="handleQuery"
+            v-model="queryParams.questionOrder"
+            placeholder="请输入题目序号"
+            clearable
+            @keyup.enter="handleQuery"
         />
       </el-form-item>
       <el-form-item label="是否删除" prop="isDelete">
         <el-input
-          v-model="queryParams.isDelete"
-          placeholder="请输入是否删除"
-          clearable
-          @keyup.enter="handleQuery"
+            v-model="queryParams.isDelete"
+            placeholder="请输入是否删除"
+            clearable
+            @keyup.enter="handleQuery"
         />
       </el-form-item>
       <el-form-item>
@@ -42,82 +42,82 @@
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
         <el-button
-          type="primary"
-          plain
-          icon="Plus"
-          @click="handleAdd"
-          v-hasPermi="['oj:MatchWeekQuestionRelate:add']"
-        >新增</el-button>
+            type="primary"
+            plain
+            icon="Plus"
+            @click="handleAdd"
+        >新增
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
-          type="success"
-          plain
-          icon="Edit"
-          :disabled="single"
-          @click="handleUpdate"
-          v-hasPermi="['oj:MatchWeekQuestionRelate:edit']"
-        >修改</el-button>
+            type="success"
+            plain
+            icon="Edit"
+            :disabled="single"
+            @click="handleUpdate"
+        >修改
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
-          type="danger"
-          plain
-          icon="Delete"
-          :disabled="multiple"
-          @click="handleDelete"
-          v-hasPermi="['oj:MatchWeekQuestionRelate:remove']"
-        >删除</el-button>
+            type="danger"
+            plain
+            icon="Delete"
+            :disabled="multiple"
+            @click="handleDelete"
+        >删除
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
-          type="warning"
-          plain
-          icon="Download"
-          @click="handleExport"
-          v-hasPermi="['oj:MatchWeekQuestionRelate:export']"
-        >导出</el-button>
+            type="warning"
+            plain
+            icon="Download"
+            @click="handleExport"
+        >导出
+        </el-button>
       </el-col>
       <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
     <el-table v-loading="loading" :data="MatchWeekQuestionRelateList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="id" align="center" prop="id" />
-      <el-table-column label="比赛id" align="center" prop="matchId" />
-      <el-table-column label="题目id" align="center" prop="questionId" />
-      <el-table-column label="题目序号" align="center" prop="questionOrder" />
-      <el-table-column label="是否删除" align="center" prop="isDelete" />
+      <el-table-column type="selection" width="55" align="center"/>
+      <el-table-column label="id" align="center" prop="id"/>
+      <el-table-column label="比赛id" align="center" prop="matchId"/>
+      <el-table-column label="题目id" align="center" prop="questionId"/>
+      <el-table-column label="题目序号" align="center" prop="questionOrder"/>
+      <el-table-column label="是否删除" align="center" prop="isDelete"/>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
-          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['oj:MatchWeekQuestionRelate:edit']">修改</el-button>
-          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['oj:MatchWeekQuestionRelate:remove']">删除</el-button>
+          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)">修改</el-button>
+          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
-      v-show="total>0"
-      :total="total"
-      v-model:page="queryParams.pageNum"
-      v-model:limit="queryParams.pageSize"
-      @pagination="getList"
+        v-show="total>0"
+        :total="total"
+        v-model:page="queryParams.pageNum"
+        v-model:limit="queryParams.pageSize"
+        @pagination="getList"
     />
 
     <!-- 添加或修改周赛题目关联对话框 -->
     <el-dialog :title="title" v-model="open" width="500px" append-to-body>
       <el-form ref="MatchWeekQuestionRelateRef" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="比赛id" prop="matchId">
-          <el-input v-model="form.matchId" placeholder="请输入比赛id" />
+          <el-input v-model="form.matchId" placeholder="请输入比赛id"/>
         </el-form-item>
         <el-form-item label="题目id" prop="questionId">
-          <el-input v-model="form.questionId" placeholder="请输入题目id" />
+          <el-input v-model="form.questionId" placeholder="请输入题目id"/>
         </el-form-item>
         <el-form-item label="题目序号" prop="questionOrder">
-          <el-input v-model="form.questionOrder" placeholder="请输入题目序号" />
+          <el-input v-model="form.questionOrder" placeholder="请输入题目序号"/>
         </el-form-item>
         <el-form-item label="是否删除" prop="isDelete">
-          <el-input v-model="form.isDelete" placeholder="请输入是否删除" />
+          <el-input v-model="form.isDelete" placeholder="请输入是否删除"/>
         </el-form-item>
       </el-form>
       <template #footer>
@@ -131,9 +131,16 @@
 </template>
 
 <script setup name="MatchWeekQuestionRelate">
-import { listMatchWeekQuestionRelate, getMatchWeekQuestionRelate, delMatchWeekQuestionRelate, addMatchWeekQuestionRelate, updateMatchWeekQuestionRelate } from "@/api/oj/MatchWeekQuestionRelate";
+import {
+  listMatchWeekQuestionRelate,
+  getMatchWeekQuestionRelate,
+  delMatchWeekQuestionRelate,
+  addMatchWeekQuestionRelate,
+  updateMatchWeekQuestionRelate
+} from "@/api/oj/MatchWeekQuestionRelate";
 import modal from "@/plugins/modal.js";
-const { proxy } = getCurrentInstance();
+
+const {proxy} = getCurrentInstance();
 
 const MatchWeekQuestionRelateList = ref([]);
 const open = ref(false);
@@ -155,11 +162,10 @@ const data = reactive({
     questionOrder: null,
     isDelete: null
   },
-  rules: {
-  }
+  rules: {}
 });
 
-const { queryParams, form, rules } = toRefs(data);
+const {queryParams, form, rules} = toRefs(data);
 
 /** 查询周赛题目关联列表 */
 function getList() {
@@ -252,12 +258,13 @@ function submitForm() {
 /** 删除按钮操作 */
 function handleDelete(row) {
   const _ids = row.id || ids.value;
-  modal.confirm('是否确认删除周赛题目关联编号为"' + _ids + '"的数据项？').then(function() {
+  modal.confirm('是否确认删除周赛题目关联编号为"' + _ids + '"的数据项？').then(function () {
     return delMatchWeekQuestionRelate(_ids);
   }).then(() => {
     getList();
     modal.msgSuccess("删除成功");
-  }).catch(() => {});
+  }).catch(() => {
+  });
 }
 
 /** 导出按钮操作 */

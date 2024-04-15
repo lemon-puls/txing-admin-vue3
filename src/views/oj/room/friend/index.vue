@@ -73,7 +73,6 @@
             icon="Edit"
             :disabled="single"
             @click="handleUpdate"
-            v-hasPermi="['oj:room:edit']"
         >修改
         </el-button>
       </el-col>
@@ -94,7 +93,6 @@
             plain
             icon="Download"
             @click="handleExport"
-            v-hasPermi="['oj:room:export']"
         >导出
         </el-button>
       </el-col>
@@ -156,7 +154,7 @@
       <el-table-column label="备注" align="center" prop="remark"/>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
-          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['oj:room:edit']">
+          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)">
             修改
           </el-button>
           <!--          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['oj:room:remove']">-->
@@ -193,7 +191,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="备注" prop="remark">
-          <el-input v-model="form.remark" placeholder="请输入备注"/>
+          <el-input maxlength="20" show-word-limit v-model="form.remark" placeholder="请输入备注"/>
         </el-form-item>
         <!--        <el-divider content-position="center">群聊房间信息</el-divider>-->
         <!--        <el-row :gutter="10" class="mb8">-->

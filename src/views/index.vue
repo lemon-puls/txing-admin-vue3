@@ -87,6 +87,13 @@ function goTarget(url) {
     border-left: 5px solid #eee;
   }
 
+  //background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
+  //position: absolute;
+  //top: 0;
+  //bottom: 0;
+  //left: 0;
+  //right: 0;
+
   hr {
     margin-top: 20px;
     margin-bottom: 20px;

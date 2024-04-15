@@ -28,10 +28,10 @@
     <div class="right">
       <div class="user-info">
         <div class="user-info-avatar">
-          <img :src="courseData?.coverUrl"/>
+          <img :src="courseData?.userShowVO.userAvatar"/>
         </div>
         <div class="user-info-other">
-          <span class="name">{{ courseData?.name }}</span>
+          <span class="name">{{ courseData?.userShowVO.userName }}</span>
           <span class="sign">{{ courseData?.intro }}</span>
         </div>
       </div>

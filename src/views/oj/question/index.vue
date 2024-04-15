@@ -17,7 +17,7 @@
             @keyup.enter="handleQuery"
         />
       </el-form-item>
-<!--      <el-form-item label="用户id" prop="userId">-->
+      <!--      <el-form-item label="用户id" prop="userId">-->
       <!--        <el-input-->
       <!--            v-model="queryParams.userId"-->
       <!--            placeholder="请输入用户id"-->
@@ -38,11 +38,10 @@
             plain
             icon="Plus"
             @click="handleAdd"
-            v-hasPermi="['oj:question:add']"
         >新增
         </el-button>
       </el-col>
-<!--      <el-col :span="1.5">-->
+      <!--      <el-col :span="1.5">-->
       <!--        <el-button-->
       <!--            type="success"-->
       <!--            plain-->
@@ -60,7 +59,6 @@
             icon="Delete"
             :disabled="multiple"
             @click="handleDelete"
-            v-hasPermi="['oj:question:remove']"
         >删除
         </el-button>
       </el-col>
@@ -70,7 +68,6 @@
             plain
             icon="Download"
             @click="handleExport"
-            v-hasPermi="['oj:question:export']"
         >导出
         </el-button>
       </el-col>
@@ -122,7 +119,7 @@
             </a-tag>
             <a-tag bordered color="blue"
             >{{
-                `${(JSON.parse(scope.row.judgeConfig).memoryLimit / (1024 * 1024)).toFixed(
+                `${(JSON.parse(scope.row.judgeConfig).memoryLimit / (1024)).toFixed(
                     2
                 )} MB`
               }}
@@ -132,7 +129,7 @@
       </el-table-column>
       <el-table-column label="点赞数" align="center" prop="thumbNum"/>
       <el-table-column label="收藏数" align="center" prop="favourNum"/>
-<!--      <el-table-column label="用户id" align="center" prop="userId"/>-->
+      <!--      <el-table-column label="用户id" align="center" prop="userId"/>-->
       <el-table-column label="创建时间" align="center" prop="createTime" width="180">
         <template #default="scope">
           <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d}') }}</span>
@@ -146,11 +143,11 @@
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
           <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row.id)"
-                     v-hasPermi="['oj:question:edit']">
+          >
             修改
           </el-button>
           <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)"
-                     v-hasPermi="['oj:question:remove']">删除
+          >删除
           </el-button>
         </template>
       </el-table-column>

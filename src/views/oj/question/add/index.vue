@@ -40,6 +40,7 @@
                 size="large"
                 :min="0"
             />
+            <span style="font-size: 18px; margin-left: 10px">MS</span>
           </a-form-item>
           <!--          <a-form-item field="judgeConfig.stackLimit" label="堆栈限制">-->
           <!--            <a-input-number-->
@@ -58,6 +59,7 @@
                 size="large"
                 :min="0"
             />
+            <span style="font-size: 18px; margin-left: 10px">KB</span>
           </a-form-item>
         </a-space>
       </a-form-item>
@@ -68,26 +70,20 @@
             :key="index"
             no-style
         >
-          <a-space direction="vertical" style="min-width: 640px">
+          <a-space direction="vertical" style="min-width: 640px; margin-bottom: 10px">
             <a-form-item
                 :field="`form.judgeCase[${index}].input`"
-                :label="`输入用例-${index}`"
+                :label="`输入用例-${index + 1}`"
                 :key="index"
             >
-              <a-input
-                  v-model="judgeCaseItem.input"
-                  placeholder="请输入测试输入用例..."
-              />
+              <a-textarea v-model="judgeCaseItem.input" placeholder="请输入测试输入用例..." allow-clear/>
             </a-form-item>
             <a-form-item
                 :field="`form.judgeCase[${index}].output`"
-                :label="`输出用例-${index}`"
+                :label="`输出用例-${index + 1}`"
                 :key="index"
             >
-              <a-input
-                  v-model="judgeCaseItem.output"
-                  placeholder="请输入测试输出用例..."
-              />
+              <a-textarea v-model="judgeCaseItem.output" placeholder="请输入测试输出用例..." allow-clear/>
             </a-form-item>
             <a-button shape="round" status="danger" @click="handleDelete(index)"
             >删除

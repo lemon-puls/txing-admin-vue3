@@ -25,9 +25,9 @@
               <router-link to="/user/profile">
                 <el-dropdown-item>个人中心</el-dropdown-item>
               </router-link>
-              <el-dropdown-item command="setLayout" v-if="settingsStore.showSettings">
-                <span>布局设置</span>
-              </el-dropdown-item>
+              <!--              <el-dropdown-item command="setLayout" v-if="settingsStore.showSettings">-->
+              <!--                <span>布局设置</span>-->
+              <!--              </el-dropdown-item>-->
               <el-dropdown-item divided command="logout">
                 <span>退出登录</span>
               </el-dropdown-item>
@@ -50,10 +50,13 @@ import HeaderSearch from '@/components/HeaderSearch'
 import useAppStore from '@/store/modules/app'
 import useUserStore from '@/store/modules/user'
 import useSettingsStore from '@/store/modules/settings'
+import {useRouter} from "vue-router";
+
 
 const appStore = useAppStore()
 const userStore = useUserStore()
 const settingsStore = useSettingsStore()
+const router = useRouter();
 
 function toggleSideBar() {
   appStore.toggleSideBar()
@@ -72,6 +75,7 @@ function handleCommand(command) {
   }
 }
 
+
 function logout() {
   ElMessageBox.confirm('确定注销并退出系统吗？', '提示', {
     confirmButtonText: '确定',
@@ -79,7 +83,10 @@ function logout() {
     type: 'warning'
   }).then(() => {
     userStore.logOut().then(() => {
-      location.href = '/index';
+      // location.href = '/index';
+      router.push({
+        path: "/index"
+      })
     })
   }).catch(() => {
   });

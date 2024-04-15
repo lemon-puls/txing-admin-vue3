@@ -28,6 +28,16 @@
             unlink-panels
         ></el-date-picker>
       </el-form-item>
+      <el-form-item label="状态" prop="status">
+        <el-select v-model="queryParams.status" placeholder="请选择">
+          <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+          </el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
         <el-button icon="Refresh" @click="resetQuery">重置</el-button>
@@ -52,7 +62,6 @@
             icon="Edit"
             :disabled="single"
             @click="handleUpdate"
-            v-hasPermi="['oj:weekMatch:edit']"
         >修改
         </el-button>
       </el-col>
@@ -63,7 +72,6 @@
             icon="Delete"
             :disabled="multiple"
             @click="handleDelete"
-            v-hasPermi="['oj:weekMatch:remove']"
         >删除
         </el-button>
       </el-col>
@@ -73,7 +81,6 @@
             plain
             icon="Download"
             @click="handleExport"
-            v-hasPermi="['oj:weekMatch:export']"
         >导出
         </el-button>
       </el-col>
@@ -83,7 +90,6 @@
             plain
             icon="Plus"
             @click="handleCreateMatch"
-            v-hasPermi="['oj:weekMatch:create']"
         >生成下场比赛
         </el-button>
       </el-col>
@@ -134,10 +140,10 @@
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
           <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)"
-                     v-hasPermi="['oj:weekMatch:edit']">修改
+          >修改
           </el-button>
           <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)"
-                     v-hasPermi="['oj:weekMatch:remove']">删除
+          >删除
           </el-button>
         </template>
       </el-table-column>
@@ -288,7 +294,7 @@ function handleAdd() {
 // 创建下一场比赛
 function handleCreateMatch() {
   let xhr = new XMLHttpRequest();
-  xhr.open('GET', 'http://localhost:8121/api/match/week/create', true);
+  xhr.open('GET', 'http://124.71.1.148:8121/api/match/week/create', true);
   xhr.onreadystatechange = function () {
     if (xhr.readyState === XMLHttpRequest.DONE) {
       if (xhr.status === 200) {
@@ -359,6 +365,27 @@ function handleExport() {
     ...queryParams.value
   }, `weekMatch_${new Date().getTime()}.xlsx`)
 }
+
+// 比赛状态
+const options = [
+  {
+    value: 0,
+    label: '未开始',
+  },
+  {
+    value: 1,
+    label: '进行中',
+  },
+  {
+    value: 2,
+    label: '已结束',
+  },
+  {
+    value: 3,
+    label: '完成判题',
+  },
+]
+
 
 getList();
 </script>
