@@ -127,7 +127,7 @@
           </a-space>
         </template>
       </el-table-column>
-      <el-table-column label="点赞数" align="center" prop="thumbNum"/>
+<!--      <el-table-column label="点赞数" align="center" prop="thumbNum"/>-->
       <el-table-column label="收藏数" align="center" prop="favourNum"/>
       <!--      <el-table-column label="用户id" align="center" prop="userId"/>-->
       <el-table-column label="创建时间" align="center" prop="createTime" width="180">
