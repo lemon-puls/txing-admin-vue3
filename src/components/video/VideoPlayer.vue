@@ -87,18 +87,12 @@ onMounted(async () => {
     player = TCPlayer(props.tcPlayerId, {
       // player-container-id 为播放器容器ID，必须与html中一致
       fileID: props.fileId, // 请传入需要播放的视频fileID 必须
-      appID: "xxxxxxx", // 请传入点播账号的子应用appID 必须
+      appID: import.meta.env.VITE_APP_VOD_APP_ID, // 请传入点播账号的子应用appID 必须
       psign: sign,
       autoplay: false, // 是否自动播放
       // 其他参数请在开发文档中查看
-      licenseUrl:
-          "https://license.vod2.myqcloud.com/license/v2/xxxxxxx/v_cube.license",
-      bigPlayButton: false,
-      // sources: [
-      //   {
-      //     src: "https://xxxxxxx.vod-qcloud.com/xxxxxxx/adp.10.m3u8", // hls 自适应码率地址
-      //   },
-      // ],
+      licenseUrl: import.meta.env.VITE_APP_VOD_LICENSE_URL,
+      bigPlayButton: false
     });
   })
 });

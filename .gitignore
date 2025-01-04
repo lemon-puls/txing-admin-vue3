@@ -21,3 +21,8 @@ selenium-debug.log
 
 package-lock.json
 yarn.lock
+
+# config files
+.env.development
+.env.production
+.env.staging
